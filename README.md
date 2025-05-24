@@ -73,9 +73,8 @@ target_link_libraries(your_target PRIVATE dmfix_win_console)
 ```
 
 ⚠️ **注意**：
-1. 需要Windows 10 1607+ 或更新版本
-2. 确保调用dm_win_console_init()初始化
-3. 支持标准ANSI转义码格式
+1. 纯C环境确保调用dm_win_console_init()初始化
+2. 支持标准ANSI转义码格式
 
 ## 贡献指南
 欢迎通过Issue和PR参与贡献！请遵循：
