@@ -1,13 +1,13 @@
-# dmfix_win_console - Windows UTF-8编码解决方案
+# dmfix_win_console - Windows控制台颜色输出解决方案
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/brinkqiang/dmfix_win_console/blob/master/LICENSE)
 [![Windows Build](https://github.com/brinkqiang/dmfix_win_console/actions/workflows/win.yml/badge.svg)](https://github.com/brinkqiang/dmfix_win_console/actions/workflows/win.yml)
 [![GitHub Stars](https://img.shields.io/github/stars/brinkqiang/dmfix_win_console.svg?style=social)](https://github.com/brinkqiang/dmfix_win_console/stargazers)
 
-专为Windows平台设计的UTF-8编码解决方案，解决MSVC编译器下的中文编码问题。
+专为Windows平台设计的控制台颜色输出解决方案，修复默认输出ANSI转义码(\33)显示问题。
 
 ## 目录
-- [dmfix\_win\_utf8 - Windows UTF-8编码解决方案](#dmfix_win_console---windows-utf-8编码解决方案)
+- [dmfix\_win\_console - Windows控制台颜色输出解决方案](#dmfix_win_console---windows控制台颜色输出解决方案)
     - [目录](#目录)
     - [背景](#背景)
     - [特性](#特性)
@@ -21,18 +21,19 @@
     - [许可证](#许可证)
 
 ## 背景
-Windows平台下使用MSVC编译器时，常遇到以下编码问题：
-- 源代码文件需要保存为带BOM的UTF-8格式
-- 控制台输出中文乱码
-- 跨平台项目编码不统一
+Windows控制台默认不兼容ANSI转义码，导致以下问题：
+- 颜色输出显示为原始转义字符（如\33[32m）
+- 跨平台应用的终端输出不一致
+- 需要手动启用虚拟终端支持
 
-本库通过CMake集成方案，提供一站式解决方案。
+本方案通过自动配置控制台和编译器，提供无缝的颜色输出支持。
 
 ## 特性
-- 🚀 自动配置MSVC编译选项 `/utf-8`
-- 🔧 简化CMake项目配置
-- 🌍 支持跨平台开发
-- 📦 轻量级头文件库
+- 🎨 自动启用Windows虚拟终端(ENABLE_VIRTUAL_TERMINAL_PROCESSING)
+- 🔧 简化CMake配置流程
+- 💻 支持现代控制台应用开发
+- 📦 跨平台兼容性设计
+- ⚡ 零额外依赖
 
 ## 安装
 ### 通过CMake集成
@@ -54,22 +55,27 @@ target_link_libraries(your_target PRIVATE dmfix_win_console)
 #include "dmfix_win_console.h"
 
 int main() {
-
-    // 使用标准输出
-    std::cout << "中文测试" << std::endl;
+    // 纯C 需要 自己初始化控制台配置 C++仅包含头文件即可
+    dm_win_console_init();
+    
+    // 正常输出颜色代码
+    std::cout << "\033[32mSuccess!\033[0m" << std::endl;
+    std::cout << "\033[31mError!\033[0m" << std::endl;
     return 0;
 }
 ```
 
 ### CMake配置示例
 ```cmake
-# 确保源代码保存为UTF-8 with BOM
-add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+# 自动配置控制台虚拟终端支持
+target_link_libraries(your_target PRIVATE dmfix_win_console)
+
 ```
 
-⚠️ **注意**：使用前请确保：
-1. 源代码文件保存为UTF-8 with BOM格式
-2. 在CMakeLists.txt中正确包含本库
+⚠️ **注意**：
+1. 需要Windows 10 1607+ 或更新版本
+2. 确保调用dm_win_console_init()初始化
+3. 支持标准ANSI转义码格式
 
 ## 贡献指南
 欢迎通过Issue和PR参与贡献！请遵循：
