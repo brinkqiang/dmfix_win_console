@@ -1,6 +1,5 @@
 
-#include "dmfix_win_console.h"
-#include "dmfix_win_utf8.h"
+#include "dmfix_win.h"
 #include "gtest.h"
 #include <iostream>
 
