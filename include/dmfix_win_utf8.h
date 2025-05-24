@@ -47,9 +47,9 @@ static inline bool dm_win_utf8_internal_do_setup(void) {
     if (setlocale(LC_ALL, "en_US.utf8") != NULL) {
         return true;
     }
-    // else if (setlocale(LC_ALL, "C.UTF-8") != NULL) {
-    //     return true;
-    // }
+    else if (setlocale(LC_ALL, "C.UTF-8") != NULL) {
+        return true;
+    }
     return false;
 #endif
 }
