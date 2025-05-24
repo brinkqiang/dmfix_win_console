@@ -17,7 +17,7 @@
         - [基本使用](#基本使用)
         - [CMake配置示例](#cmake配置示例)
     - [贡献指南](#贡献指南)
-    - [测试](#测试)
+    - [编译](#编译)
     - [许可证](#许可证)
 
 ## 背景
@@ -82,12 +82,9 @@ target_link_libraries(your_target PRIVATE dmfix_win_console)
 2. 保持代码风格统一
 3. 更新相关文档
 
-## 测试
-```bash
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-cmake --build . --config Release
-ctest -C Release
+## 编译
+```cmd
+build.bat
 ```
 
 ## 许可证
