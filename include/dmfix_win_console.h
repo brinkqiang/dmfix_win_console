@@ -78,13 +78,11 @@ namespace DmInternal {
     static inline DmWinConsoleInitializer g_dm_win_console_auto_initializer_instance;
 } // namespace DmInternal
 
-// extern "C" bool dm_win_console_init_explicitly() {
-// return dm_win_console_internal_do_setup();
-// }
+extern "C" bool dm_win_console_init() {
+    return dm_win_console_internal_do_setup();
+}
 
-#else // C 编译模式: 用户需要显式调用初始化函数
-
-// 为 C 用户提供一个清晰的初始化函数接口
+#else
 static inline bool dm_win_console_init(void) {
     return dm_win_console_internal_do_setup();
 }

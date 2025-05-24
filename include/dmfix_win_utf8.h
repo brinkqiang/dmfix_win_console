@@ -79,9 +79,9 @@ namespace DmInternal {
     static inline DmWinUtf8Initializer g_dm_win_utf8_auto_initializer_instance;
 } // namespace DmInternal
 
-// extern "C" bool dm_win_utf8_init_explicitly() {
-//     return dm_win_utf8_internal_do_setup();
-// }
+extern "C" bool dm_win_utf8_init() {
+    return dm_win_utf8_internal_do_setup();
+}
 
 #else
 static inline bool dm_win_utf8_init(void) {
