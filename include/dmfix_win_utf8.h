@@ -72,7 +72,7 @@ namespace DmInternal {
             (void)dm_win_utf8_internal_do_setup();
         }
     };
-    static inline DmWinUtf8Initializer g_dm_win_utf8_auto_initializer_instance;
+    static DmWinUtf8Initializer g_dm_win_utf8_auto_initializer_instance;
 } // namespace DmInternal
 
 // Example of an explicit C-linkage function if needed
