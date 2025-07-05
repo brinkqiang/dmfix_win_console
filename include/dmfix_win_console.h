@@ -89,12 +89,12 @@ namespace DmInternal {
   // is called once for the program, triggering the console setup.
   // If pre-C++17, 'static' alone in a header would mean one per translation unit.
   // 'inline' helps ensure ODR (One Definition Rule) compliance.
-  static DmWinConsoleInitializer g_dm_win_console_auto_initializer_instance;
+  static inline DmWinConsoleInitializer g_dm_win_console_auto_initializer_instance;
 
 } // namespace DmInternal
 
 // Public C-linkage function for manual initialization if needed from C++
-extern "C" bool dm_win_console_init() {
+extern "C" static bool dm_win_console_init() {
   return dm_win_console_internal_do_setup();
 }
 
